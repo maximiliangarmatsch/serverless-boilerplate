@@ -40,6 +40,14 @@
 ]
 ```
 
-### 4. Dynamo Info
+### 4. In the DB there is several users with
+
+path: api/user/{id} method: get
+path: api/user/{id} method: delete
+path: api/user/ method: get
+path: api/user/ method: post
+path: api/user/ method: put
+
+### 5. Dynamo Info
 
   DB IS RUNNING IN MEMORY, data that is entered will be deleted after reset.
