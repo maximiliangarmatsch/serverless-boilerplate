@@ -1,0 +1,20 @@
+[
+    {
+        "createdDate": "Fri Mar 13 2020 12:35:28 GMT+0100 (Central European Standard Time)",
+        "firstName": "Admin",
+        "lastName": "Root",
+        "id": "1"
+    },
+    {
+        "createdDate": "Fri Mar 13 2020 12:35:28 GMT+0100 (Central European Standard Time)",
+        "firstName": "Jo",
+        "lastName": "Doom",
+        "id": "2"
+    },
+    {
+        "createdDate": "Fri Mar 13 2020 12:35:28 GMT+0100 (Central European Standard Time)",
+        "firstName": "Ira",
+        "lastName": "Hayes",
+        "id": "3"
+    }
+]

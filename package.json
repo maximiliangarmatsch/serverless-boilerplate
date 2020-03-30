@@ -1,0 +1,33 @@
+{
+  "name": "app-aws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "start": "sls offline start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.39",
+    "@types/node": "^13.7.1",
+    "aws-sdk": "^2.606.0",
+    "dotenv": "^8.2.0",
+    "reflect-metadata": "^0.1.13",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-layers": "^1.4.4",
+    "serverless-offline": "^5.12.1",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-prune-plugin": "^1.4.1",
+    "serverless-pseudo-parameters": "^2.5.0",
+    "serverless-webpack": "^5.3.1",
+    "serverless-webpack-plugin": "^0.4.5",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.3.3",
+    "webpack": "^4.41.5",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

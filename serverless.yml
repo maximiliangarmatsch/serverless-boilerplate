@@ -1,0 +1,84 @@
+service: ucom-aws
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:*"
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-webpack
+  - serverless-pseudo-parameters
+  - serverless-prune-plugin
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-layers
+
+functions:
+  - ${file(./functions/user.yml)}
+
+resources:
+  Resources:
+    # User Table
+    user:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: user
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+    # Database Table declaration end
+
+custom:
+  serverless-offline:
+    port: 4000
+  webpack:
+    webpackConfig: ./webpack.config.js
+  prune:
+    automatic: true
+    number: 3
+  serverless-layers:
+    packageManger: npm
+    compatibleRuntimes:
+      - nodejs12.x
+    layersDeploymentBucket: bolerplate-fun-lambda-layers-bucket
+  env:
+    StageName: ${self:service}-${self:provider.stage}
+    region: eu-central-1
+
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true,
+      convertEmptyValues: true,
+      seed: true
+    # Uncomment only if you already have a DynamoDB running locally
+    # noStart: true
+    seed:
+      domain:
+        sources:
+          - table: user
+            sources: [./src/db/seed/user.json]
+         
