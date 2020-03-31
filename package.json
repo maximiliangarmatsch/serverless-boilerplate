@@ -9,8 +9,7 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/aws-lambda": "^8.10.39",
     "@types/node": "^13.7.1",

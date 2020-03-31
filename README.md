@@ -3,9 +3,10 @@
 ## Start backend boilerplate
 
   1. npm install
-  2. npm install serverless -g
+  2. npm install serverless -g (possibly with admin access, sudo)
   3. sls dynamodb install
-  4. npm run start
+  4. Install Java JDK  (https://www.oracle.com/java/technologies/javase-jdk13-downloads.html)
+  5. npm run start
   
 ### 1. Serverless will start on
 
@@ -15,29 +16,9 @@
 
   port 8080
 
-### 3. In the DB there is several users with
-
-``` json
-[
-    {
-        "firstName": "Admin",
-        "lastName": "Root",
-        "createdDate": "Fri Mar 13 2020 12:35:28 GMT+0100 (Central European Standard Time)",
-        "id": "1"
-    },
-    {
-        "firstName": "Ira",
-        "lastName": "Hayes",
-        "createdDate": "Fri Mar 13 2020 12:35:28 GMT+0100 (Central European Standard Time)",
-        "id": "3"
-    },
-    {
-        "firstName": "Jo",
-        "lastName": "Doom",
-        "createdDate": "Fri Mar 13 2020 12:35:28 GMT+0100 (Central European Standard Time)",
-        "id": "2"
-    }
-]
+### 3. In the DB there is several users. see
+```
+src/db/seed/users.json
 ```
 
 ### 4. In the DB there is several users with
