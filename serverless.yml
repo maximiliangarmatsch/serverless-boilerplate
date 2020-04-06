@@ -14,7 +14,10 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:*"
-
+    - Effect: Allow
+      Action:
+        - 'cognito-idp:*'
+      Resource: "arn:aws:cognito-idp:${opt:region, self:provider.region}:*:*"
 plugins:
   - serverless-dotenv-plugin
   - serverless-webpack
@@ -29,7 +32,6 @@ functions:
 
 resources:
   Resources:
-    # User Table
     user:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -43,8 +45,26 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-
-    # Database Table declaration end
+    CognitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        # Generate a name based on the stage
+        UserPoolName: ${self:custom.stage}-ext-user-pool
+        # Set email as an alias
+        UsernameAttributes:
+          - email
+        AutoVerifiedAttributes:
+          - email
+    CognitoUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        # Generate an app client name based on the stage
+        ClientName: ${self:custom.stage}-ext-user-pool-client
+        UserPoolId:
+          Ref: CognitoUserPool
+        ExplicitAuthFlows:
+          - ADMIN_NO_SRP_AUTH
+        GenerateSecret: false
 
 custom:
   serverless-offline:
