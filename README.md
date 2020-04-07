@@ -1,13 +1,18 @@
-# INSTRUSCTION
+# INSTRUCTION
 
-## Start backend boilerplate
+## Description
+A basic setup using serverless and dynamoDB.
+
+
+## Intallation
 
   1. npm install
   2. npm install serverless -g (possibly with admin access, sudo)
   3. sls dynamodb install
-  4. Install Java JDK  (https://www.oracle.com/java/technologies/javase-jdk13-downloads.html)
+  4. Install Java JDK  13+ (https://www.oracle.com/java/technologies/javase-jdk13-downloads.html)
   5. npm run start
   
+
 ### 1. Serverless will start on
 
   port 4000
@@ -32,3 +37,7 @@ path: api/user/ method: put
 ### 5. Dynamo Info
 
   DB IS RUNNING IN MEMORY, data that is entered will be deleted after reset.
+
+### 6. Other notes from Max
+  Deploy to AWS
+  https://eu-central-1.console.aws.amazon.com/lambda/home?region=eu-central-1#/functions
