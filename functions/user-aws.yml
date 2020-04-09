@@ -1,4 +1,4 @@
-user:
+user-aws:
   handler: src/handler/user-aws.handler
   events:
     - http:
