@@ -1,0 +1,23 @@
+user:
+  handler: src/handler/user-aws.handler
+  events:
+    - http:
+        path: api/user/{id}
+        method: get
+        cors: true
+    - http:
+        path: api/user/
+        method: get
+        cors: true
+    - http:
+        path: api/user/
+        method: post
+        cors: true
+    - http:
+        path: api/user/{id}
+        method: delete
+        cors: true
+    - http:
+        path: api/user/
+        method: put
+        cors: true
