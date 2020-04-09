@@ -67,6 +67,7 @@ resources:
         GenerateSecret: false
 
 custom:
+  stage: dev
   serverless-offline:
     port: 4000
   webpack:
