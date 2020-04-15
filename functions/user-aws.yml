@@ -2,22 +2,22 @@ user-aws:
   handler: src/handler/user-aws.handler
   events:
     - http:
-        path: api/user/{id}
+        path: api/user-aws/{id}
         method: get
         cors: true
     - http:
-        path: api/user/
+        path: api/user-aws/
         method: get
         cors: true
     - http:
-        path: api/user/
+        path: api/user-aws/
         method: post
         cors: true
     - http:
-        path: api/user/{id}
+        path: api/user-aws/{id}
         method: delete
         cors: true
     - http:
-        path: api/user/
+        path: api/user-aws/
         method: put
         cors: true
