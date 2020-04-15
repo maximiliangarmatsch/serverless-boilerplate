@@ -29,6 +29,7 @@ plugins:
 
 functions:
   - ${file(./functions/user.yml)}
+  - ${file(./functions/user-aws.yml)}
 
 resources:
   Resources:
@@ -102,4 +103,3 @@ custom:
         sources:
           - table: user
             sources: [./src/db/seed/user.json]
-         
