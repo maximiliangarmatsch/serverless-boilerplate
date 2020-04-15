@@ -5,6 +5,7 @@ import {
 	AuthenticationDetails,
 	CognitoUserAttribute
 } from 'amazon-cognito-identity-js';
+import { CognitoIdentityServiceProvider } from 'aws-sdk';
 
 export class UserAWSService {
 	private poolData = {
@@ -13,32 +14,30 @@ export class UserAWSService {
 	};
 	async save(body: any) {
 
-		var userPool = new CognitoUserPool(this.poolData);
+		const COGNITO_CLIENT = new CognitoIdentityServiceProvider({
+			apiVersion: "2016-04-19",
+			region: "us-east-1"
+		});
 
-		var attributeList = [];
-
-		var dataEmail = {
-			Name: 'email',
-			Value: body.email // your email here
+		var userData = {
+			UserPoolId: this.poolData.UserPoolId,
+			Username: body.email,
+			DesiredDeliveryMediums: ["EMAIL"],
+			TemporaryPassword: "Abc@321",
+			UserAttributes: [
+				{
+					Name: "email",
+					Value: body.email
+				},
+				{
+					Name: "email_verified",
+					Value: "true"
+				}
+			]
 		};
-		var dataPhoneNumber = {
-			Name: 'phone_number',
-			Value: body.phone // your phone number here with +country code and no delimiters in front
-		};
-		var attributeEmail = new CognitoUserAttribute(dataEmail);
-		var attributePhoneNumber = new CognitoUserAttribute(dataPhoneNumber);
-
-		attributeList.push(attributeEmail);
-		attributeList.push(attributePhoneNumber);
-
-		var cognitoUser;
-		userPool.signUp( body.username, body.password, attributeList, null, function (err, result) {
-			if (err) {
-				alert(err);
-				return;
-			}
-			cognitoUser = result.user;
-			console.log('user name is ' + cognitoUser.getUsername());
+		COGNITO_CLIENT.adminCreateUser(userData, (error, data) => {
+			console.log(error);
+			console.log(data);
 		});
 	}
 
