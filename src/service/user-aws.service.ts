@@ -2,20 +2,52 @@
 import {
 	CognitoUserPool,
 	CognitoUser,
-	AuthenticationDetails
+	AuthenticationDetails,
+	CognitoUserAttribute
 } from 'amazon-cognito-identity-js';
 
 export class UserAWSService {
+	private poolData = {
+		UserPoolId: 'eu-central-1_u3BfmCVHK', // Your user pool id here
+		ClientId: '6itvo8r00itphfgt8uudtn151g', // Your client id here
+	};
+	async save(body: any) {
+
+		var userPool = new CognitoUserPool(this.poolData);
+
+		var attributeList = [];
+
+		var dataEmail = {
+			Name: 'email',
+			Value: body.email // your email here
+		};
+		var dataPhoneNumber = {
+			Name: 'phone_number',
+			Value: body.phone // your phone number here with +country code and no delimiters in front
+		};
+		var attributeEmail = new CognitoUserAttribute(dataEmail);
+		var attributePhoneNumber = new CognitoUserAttribute(dataPhoneNumber);
+
+		attributeList.push(attributeEmail);
+		attributeList.push(attributePhoneNumber);
+
+		var cognitoUser;
+		userPool.signUp('username', 'password', attributeList, null, function (err, result) {
+			if (err) {
+				alert(err);
+				return;
+			}
+			cognitoUser = result.user;
+			console.log('user name is ' + cognitoUser.getUsername());
+		});
+	}
 
 	async getOne(body: any) {
 		var authenticationDetails = new AuthenticationDetails(
 			{ Username: body.username, Password: body.password }
 		);
-		var poolData = {
-			UserPoolId: 'eu-central-1_u3BfmCVHK', // Your user pool id here
-			ClientId: '6itvo8r00itphfgt8uudtn151g', // Your client id here
-		};
-		var userPool = new CognitoUserPool(poolData);
+
+		var userPool = new CognitoUserPool(this.poolData);
 		var userData = {
 			Username: body.username,
 			Pool: userPool,
