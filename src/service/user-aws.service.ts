@@ -9,8 +9,8 @@ import { CognitoIdentityServiceProvider } from 'aws-sdk';
 
 export class UserAWSService {
 	private poolData = {
-		UserPoolId: 'eu-central-1_u3BfmCVHK', // Your user pool id here
-		ClientId: '6itvo8r00itphfgt8uudtn151g', // Your client id here
+		UserPoolId: 'eu-central-1_q1VFP8Fhv', // Your user pool id here
+		ClientId: '1o32qfa112h8cinsarplmuvglb', // Your client id here
 	};
 	async save(body: any) {
 
