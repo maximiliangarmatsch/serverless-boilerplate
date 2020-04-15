@@ -32,7 +32,7 @@ export class UserAWSService {
 		attributeList.push(attributePhoneNumber);
 
 		var cognitoUser;
-		userPool.signUp('username', 'password', attributeList, null, function (err, result) {
+		userPool.signUp( body.username', body.password, attributeList, null, function (err, result) {
 			if (err) {
 				alert(err);
 				return;
