@@ -5,10 +5,11 @@ export class UserAWSController extends BasicController<any>{
     private service: UserAWSService = new UserAWSService();
 
     post() {
-        if (this.body.pass) {
-            return this.service.getOne(JSON.parse(this.body))
+        let body = JSON.parse(this.body);
+        if (body.username) {
+            return this.service.getOne(body);
         } else {
-            return this.service.save(JSON.parse(this.body))
+            return this.service.save(body);
         }
     }
     put() {
