@@ -13,17 +13,16 @@ export class UserAWSService {
 		ClientId: '1o32qfa112h8cinsarplmuvglb', // Your client id here
 	};
 	async save(body: any) {
-
 		const COGNITO_CLIENT = new CognitoIdentityServiceProvider({
 			apiVersion: "2016-04-19",
-			region: "us-east-1"
+			region: "eu-central-1"
 		});
 
 		var userData = {
 			UserPoolId: this.poolData.UserPoolId,
 			Username: body.email,
 			DesiredDeliveryMediums: ["EMAIL"],
-			TemporaryPassword: "Abc@321",
+			TemporaryPassword: "Abc1@321",
 			UserAttributes: [
 				{
 					Name: "email",
@@ -35,10 +34,20 @@ export class UserAWSService {
 				}
 			]
 		};
-		COGNITO_CLIENT.adminCreateUser(userData, (error, data) => {
-			console.log(error);
-			console.log(data);
-		});
+		const res = await new Promise((resolve, reject) => {
+			COGNITO_CLIENT.adminCreateUser(userData, (error, data) => {
+				if (error) {
+					console.log(error);
+					reject(error);
+				} else {
+					console.log(data);
+					resolve(data)
+				}
+
+			});
+
+		})
+		return res;
 	}
 
 	async getOne(body: any) {
@@ -74,7 +83,7 @@ export class UserAWSService {
 				},
 			});
 		})
-		return res
+		return res;
 	}
 
 }
